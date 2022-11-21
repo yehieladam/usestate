@@ -4,7 +4,11 @@ function App() {
   return (
     <div className="App">
       Usestate
+   
+  <div className="box" >
   <Counter/>
+
+  </div>
     </div>
   );
 }
