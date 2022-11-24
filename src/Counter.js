@@ -1,11 +1,21 @@
 import { useState } from "react";
-function Counter() {
-    const[count, setCount]  = useState(1); 
-    const[delta,setDelta] = useState(1);
-    function incr(){ 
+function Counter(props) {
+  
+  const{limit} = props; 
+  const{delta} = props; 
+  const[count, setCount]  = useState(1); 
+
+  function incr(){ 
       setCount(
         function(oldCount){
-          return oldCount + delta
+          if (oldCount + delta>limit){
+            setCount(0)
+          } 
+            else{
+              return oldCount + delta
+
+            }
+            
         }
       )
     }   
@@ -17,17 +27,11 @@ function Counter() {
         }
       )
     }   
-    function hendeleDelta(e){
-      console.log(e)
-      setDelta(Number(e.target.value)
-
-    }
+  
   return (
     <div>
-      <h1>Counter</h1>
-      <input type = "number" value={delta} onChange={hendeleDelta}/>
+    <h1>Counter</h1>
     <p>Counter is at {count}</p>
-    
     <button onClick={incr}>Click to add {delta} </button>
     <button onClick={Res}>  Reset  </button>
     </div>
