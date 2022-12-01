@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 function Counter(props) {
   
-  const{limit} = props; 
-  const{delta} = props; 
+  const{delta,Max,GetReset,needToreset} = props; 
   const[count, setCount]  = useState(1); 
+
+useEffect(()=>{
+if(needToreset){
+  setCount(0)
+  GetReset(false)
+}
+
+},[needToreset,GetReset])
+
 
   function incr(){ 
       setCount(
         function(oldCount){
-          if (oldCount + delta>limit){
+          if (oldCount + delta>Max){
             setCount(0)
           } 
             else{
@@ -19,13 +27,9 @@ function Counter(props) {
         }
       )
     }   
-    function Res(){ 
-      setCount(
-        function(oldCount){
-          oldCount = 0;
-          return oldCount
-        }
-      )
+    function Res(){
+      GetReset(true) 
+     // setCount(0)
     }   
   
   return (
@@ -33,7 +37,7 @@ function Counter(props) {
     <h1>Counter</h1>
     <p>Counter is at {count}</p>
     <button onClick={incr}>Click to add {delta} </button>
-    <button onClick={Res}>  Reset  </button>
+    <button onClick={Res}>   Reset  </button>
     </div>
    
   

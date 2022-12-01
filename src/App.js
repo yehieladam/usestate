@@ -5,18 +5,24 @@ import Counter from './Counter';
 
 
 function App() {
-
+ 
     const[delta,setDelta] = useState(1);
-    const[limit,setLimit] = useState(1);
+    const[Max,setMax] = useState(1);
+    const[Res,setReset] = useState(false);
 
-    function limitos(l){
-      setLimit(Number(l.target.value))
+
+function hendeleMax(e){
+      setMax(Number(e.target.value))
 }
 
+function GetReset(data){
+  console.log(data)
+  setReset(data)
+}
 
-    function hendeleDelta(e){
+function hendeleDelta(e){
         setDelta(Number(e.target.value))
-        if(delta >= limit)
+        if(delta >= Max)
         setDelta("0")
       }
   
@@ -27,13 +33,13 @@ function App() {
    
   <div className="box" >
   <p>Choose the maximum number for the counter is </p>
-  <input type = "number" value={limit} onChange={limitos}/> 
-    
-  <p> Counter should jump By </p><input type = "number" value={delta} onChange={hendeleDelta}/>
+  <input type = "number" value={Max} onChange={hendeleMax}/> 
 
-  <Counter delta = {delta} limit ={limit} />
-  <Counter delta = {delta} limit ={limit} />
+  <p> Counter should jump By </p>
+  <input type = "number" value={delta} onChange={hendeleDelta}/>
 
+  <Counter delta = {delta} Max ={Max} GetReset = {GetReset} needToreset={Res} />
+  <Counter delta = {delta} Max ={Max} GetReset = {GetReset} needToreset={Res} />
   </div>
     </div>
   );
