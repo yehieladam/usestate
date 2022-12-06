@@ -9,23 +9,32 @@ function App() {
     const[delta,setDelta] = useState(1);
     const[Max,setMax] = useState(1);
     const[Res,setReset] = useState(false);
+    const [highest, sethighest] =useState(1)
 
+
+  
 
 function hendeleMax(e){
       setMax(Number(e.target.value))
 }
+
+
 
 function GetReset(data){
   console.log(data)
   setReset(data)
 }
 
+
 function hendeleDelta(e){
         setDelta(Number(e.target.value))
         if(delta >= Max)
         setDelta("0")
       }
-  
+
+function saveHighest(high){
+        sethighest(high)    
+      }
 
   return (
     <div className="App">
@@ -38,8 +47,11 @@ function hendeleDelta(e){
   <p> Counter should jump By </p>
   <input type = "number" value={delta} onChange={hendeleDelta}/>
 
-  <Counter delta = {delta} Max ={Max} GetReset = {GetReset} needToreset={Res} />
-  <Counter delta = {delta} Max ={Max} GetReset = {GetReset} needToreset={Res} />
+  <p>Highest so far:</p>
+  <p>{highest}</p>
+
+  <Counter delta = {delta} Max ={Max} GetReset = {GetReset} needToreset={Res} saveHighest={saveHighest} highest ={highest}   />
+  <Counter delta = {delta} Max ={Max} GetReset = {GetReset} needToreset={Res} saveHighest={saveHighest} highest ={highest} />
   </div>
     </div>
   );
